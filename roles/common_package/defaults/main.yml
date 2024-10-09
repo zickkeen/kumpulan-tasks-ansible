@@ -1,0 +1,18 @@
+---
+common_packages:
+  debian:
+    - nano
+    - vim  # Debian menggunakan vim
+    - zip
+    - unzip
+    - curl
+    - wget
+    - apache2  # Debian
+  redhat:
+    - nano
+    - vi  # Catatan: vi adalah versi dari vim pada RedHat
+    - zip
+    - unzip
+    - curl
+    - wget
+    - httpd  # RedHat

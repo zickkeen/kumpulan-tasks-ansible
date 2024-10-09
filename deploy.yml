@@ -1,0 +1,9 @@
+---
+- name: Deploy
+  hosts: all
+  become: yes
+  vars:
+    sudo_group: "{{ 'sudo' if ansible_facts['os_family'] == 'Debian' else 'wheel' }}"
+    action: 'deploy'
+  roles:
+    - common_package

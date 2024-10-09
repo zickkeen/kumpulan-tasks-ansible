@@ -1,0 +1,9 @@
+---
+- name: Undeploy
+  hosts: all
+  become: yes
+  vars:
+    sudo_group: "{{ 'sudo' if ansible_facts['os_family'] == 'Debian' else 'wheel' }}"
+    action: 'uninstall'
+  roles:
+    - common_package

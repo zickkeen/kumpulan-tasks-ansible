@@ -1,0 +1,6 @@
+---
+- include_tasks: deploy.yml
+  when: action == 'deploy'
+
+- include_tasks: undeploy.yml
+  when: action == 'undeploy'
