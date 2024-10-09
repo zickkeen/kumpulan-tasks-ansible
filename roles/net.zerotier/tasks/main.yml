@@ -1,0 +1,20 @@
+---
+- name: Check if zerotier-cli is installed
+  ansible.builtin.command: which zerotier-cli
+  register: zerotier_cli_check
+  ignore_errors: yes
+
+- name: Download and install ZeroTier
+  ansible.builtin.command: curl -s https://install.zerotier.com | bash
+  args:
+    executable: /bin/bash
+  when: zerotier_cli_check.rc != 0
+
+- name: Check if already joined to any ZeroTier network
+  ansible.builtin.command: zerotier-cli listnetworks
+  register: zerotier_networks
+  ignore_errors: yes
+
+- name: Join ZeroTier network
+  ansible.builtin.command: "zerotier-cli join {{ zerotier_network }}"
+  when: zerotier_cli_check.rc == 0 and (zerotier_network not in zerotier_networks.stdout) 
